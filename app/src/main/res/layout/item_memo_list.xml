@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/memoContainerLayout"
+            android:layout_margin="10dp"
+            android:background="@color/sky"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutDescription="@xml/item_memo_list_scene">
+
+            <ImageView
+                android:id="@+id/backgroundImageView"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.35" />
+
+            <TextView
+                android:id="@+id/memoContentTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:ems="7"
+                android:maxLines="5"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/backgroundImageView"
+                app:layout_constraintEnd_toEndOf="@+id/backgroundImageView"
+                app:layout_constraintStart_toStartOf="@id/backgroundImageView"
+                app:layout_constraintTop_toTopOf="@id/backgroundImageView"
+                tools:text="메모의 내용입니다." />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/photoRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:focusableInTouchMode="false"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/backgroundImageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/deleteTextButton"
+                android:layout_width="100dp"
+                android:layout_height="0dp"
+                android:text="@string/delete"
+                android:background="@color/red"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</layout>

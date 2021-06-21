@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/handleImageContainer"
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/deletePictureImageVIew"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_cancel_48"
+            app:layout_constraintEnd_toEndOf="@+id/itemPicture"
+            app:layout_constraintTop_toTopOf="@+id/itemPicture" />
+
+
+            <ImageView
+                android:id="@+id/itemPicture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars"
+                 />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

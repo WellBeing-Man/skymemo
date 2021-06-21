@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">skymemo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logo">logo_image</string>
+    <string name="button">button</string>
+    <string name="thumb_nail">thumnail_image</string>
+    <string name="delete">삭제</string>
+</resources>

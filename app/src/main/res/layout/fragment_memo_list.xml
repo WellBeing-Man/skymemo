@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="memoListViewModel"
+            type="com.ldg.skymemo.list.ListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".list.ListFragment">
+
+        <ImageView
+            android:id="@+id/addMemoImageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:onClick="@{()->memoListViewModel.onClickAddButton()}"
+            android:src="@drawable/ic_baseline_add_circle_outline_48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/button"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:descendantFocusability="blocksDescendants"
+            app:layout_constraintTop_toBottomOf="@+id/addMemoImageView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/memoRecyclerView"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_memo_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

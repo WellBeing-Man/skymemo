@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/memo_nav"
+    app:startDestination="@id/handleFragment">
+
+    <fragment
+        android:id="@+id/handleFragment"
+        android:name="com.ldg.skymemo.memo.HandleFragment"
+        android:label="HandleFragment"
+        tools:layout="@layout/fragment_memo_handle">
+        <action
+            android:id="@+id/action_handleFragment_to_imageSourceDialog"
+            app:destination="@id/imageSourceDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/imageSourceDialog"
+        android:name="com.ldg.skymemo.dialog.ImageSourceDialog"
+        android:label="ImageSourceDialog"
+        tools:layout="@layout/image_source_dialog"/>
+</navigation>
