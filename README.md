@@ -11,5 +11,6 @@
 ## Todo
  - Unit Test 적용
  - Motion layout 적용 
+ - 메모 내용 자동인식
  - Server & Datbase
  - To be more clean code..
