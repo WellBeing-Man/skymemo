@@ -20,10 +20,6 @@
  3. 메모 파일이 remote storage에도 저장
  
  
-
-
-## Function
-
 ## Todo
  1. <del>주석 정리</del> -> Done, 지속적인 주석 필요
  2. <del>예쁜 UI 적용</del> -> Done
