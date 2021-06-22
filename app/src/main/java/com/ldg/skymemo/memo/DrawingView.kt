@@ -13,6 +13,7 @@ import java.util.*
 import kotlin.math.abs
 
 
+// 메모 작성 페이지에서 그림을 그리는 뷰
 class DrawingView@JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : View(context, attrs, defStyleAttr) {
 
@@ -26,9 +27,11 @@ class DrawingView@JvmOverloads constructor(context: Context, attrs: AttributeSet
 
     private var path = Path()
 
+    // undo,redo를 위한 리스트
     private val paths=ArrayList<Path>()
     private val undoPath=ArrayList<Path>()
 
+    //false = 그리기 불가, true = 그리기 가능
     private var isDrawingMode:Boolean=false
 
 
@@ -74,6 +77,7 @@ class DrawingView@JvmOverloads constructor(context: Context, attrs: AttributeSet
         }
     }
 
+    //todo redo 기능 추가
     fun onClickRedo() {
         if (undoPath.size> 0) {
             paths.add(undoPath.removeLast())
@@ -81,6 +85,7 @@ class DrawingView@JvmOverloads constructor(context: Context, attrs: AttributeSet
         }
     }
 
+    // path 그리기
     override fun onDraw(canvas: Canvas) {
         for (path in paths) {
             canvas.drawPath(path, paint)
@@ -124,6 +129,7 @@ class DrawingView@JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
 
+    //draw mode 스위칭 메서드
     fun unlockDrawMode(){
         isDrawingMode=true
     }

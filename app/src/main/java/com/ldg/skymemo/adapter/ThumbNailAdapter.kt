@@ -1,14 +1,12 @@
 package com.ldg.skymemo.adapter
 
 import android.graphics.Bitmap
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.ldg.skymemo.databinding.ItemThumnailImageBinding
 import com.ldg.skymemo.viewholder.ThumbnailViewHolder
-import javax.inject.Inject
 
+
+// 메모 리스트에서 메모가 가지고 있는 비트맵 이미지의 썸네일 어댑터
 class ThumbNailAdapter: RecyclerView.Adapter<ThumbnailViewHolder>() {
 
     val list= mutableListOf<Bitmap>()

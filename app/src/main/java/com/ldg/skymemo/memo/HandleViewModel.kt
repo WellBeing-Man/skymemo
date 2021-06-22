@@ -26,7 +26,7 @@ class HandleViewModel @Inject constructor(private val memoFileSaverImpl: FileSav
     val pictures= ListLiveData<Bitmap>()
 
 
-    private val pictureLimit=10
+    private val pictureLimit=6
 
     fun onSaveButtonClick(){
         _saveButtonClick.value=true
@@ -36,6 +36,8 @@ class HandleViewModel @Inject constructor(private val memoFileSaverImpl: FileSav
     }
 
 
+    //메모 파일 저장
+    // filesaver를 주입받아 사용
     fun saveMemo(text:String, view: DrawingView, activity: Activity){
         val isEmpty=(pictures.size() == 0  && text == "" && view.isDrawNothing())
         if(isEmpty) {
@@ -62,6 +64,7 @@ class HandleViewModel @Inject constructor(private val memoFileSaverImpl: FileSav
         pictures.remove(index)
     }
 
+    //사진 파일은 6개가 한계
     private fun checkLimit():Boolean{
         return pictures.size() <= pictureLimit || pictures.size()>=0
     }

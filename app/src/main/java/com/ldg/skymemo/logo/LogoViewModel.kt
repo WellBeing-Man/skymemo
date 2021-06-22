@@ -16,6 +16,7 @@ class LogoViewModel  @Inject constructor(): ViewModel() {
     val onMovePage:LiveData<Boolean>
         get() = _onMovePage
 
+    //2초 대기
     fun onMovePageStart(){
         viewModelScope.launch {
             delay(2000)

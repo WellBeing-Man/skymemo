@@ -22,13 +22,9 @@ class MemoListAdapter (private val onDelete: (memo:Memo)->Unit) : ListAdapter<Me
     }
 
     override fun onBindViewHolder(holder: MemoListViewHolder, position: Int) {
-
         holder.bind(currentList[position],onDelete)
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return position
-    }
 
     companion object{
         val diffUtil = object : DiffUtil.ItemCallback<Memo>() {

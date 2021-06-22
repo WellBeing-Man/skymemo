@@ -2,6 +2,7 @@ package com.ldg.skymemo.util
 
 import androidx.lifecycle.MutableLiveData
 
+//LiveData를 list형태로 사용하기 위한 Util
 class ListLiveData<T> : MutableLiveData<ArrayList<T>> {
 
     constructor(){

@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 
+// 로고를 보여주는 프래그먼트
 @AndroidEntryPoint
 class LogoFragment : BindingFragment<FragmentLogoBinding>() {
 
@@ -33,7 +34,7 @@ class LogoFragment : BindingFragment<FragmentLogoBinding>() {
         setOnMovePage()
     }
 
-
+    //2초간 대기후 리스트 프래그먼트로 이동
     private fun setOnMovePage() {
         logoViewModel.onMovePageStart()
 

@@ -36,25 +36,30 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
 
     private val handleViewModel : HandleViewModel by viewModels()
 
+    //todo adapter에 대한 의존성 줄이
     private lateinit var handlePictureAdapter : HandlePictureAdapter
 
-    private lateinit var onBackPressedCallback: OnBackPressedCallback
+    //메모 저장 콜백
+    private lateinit var onBackPressedSaveMemoCallback: OnBackPressedCallback
 
 
+    //비트맵 파일을 위한 temp variable
     private var tempFilePath:String=""
 
+    // 카메라 이벤트 요청
     private  val camRequestActivityLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
     ) { result ->
         addBitmapFromCamToViewModel(result)
     }
-
+    //앨범에 이벤트 요청
     private  val albumRequestActivityLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
     ) { result ->
         addBitmapFromAlbumToViewModel(result)
     }
 
+    //뷰모델에 카메라 이벤트 result 전달
     private fun addBitmapFromCamToViewModel(result: ActivityResult) {
         try {
             if (result.resultCode == Activity.RESULT_OK) {
@@ -66,7 +71,7 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
             n.printStackTrace()
         }
     }
-
+    //뷰모델에 앨범 이벤트 result 전달
     private fun addBitmapFromAlbumToViewModel(result: ActivityResult) {
         result.data?.data?.let {
             try {
@@ -118,6 +123,7 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
     }
 
 
+    // 각 라디오 버튼 클릭 리스너
     private fun initClick()= with(binding) {
         radioGroup.setOnCheckedChangeListener { rG, id ->
             when (id) {
@@ -155,7 +161,7 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
     }
 
 
-
+    //앨범 리퀘스트
     private fun albumRequest() {
         Intent(Intent.ACTION_PICK).also { intent->
             intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
@@ -163,22 +169,7 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
         }
     }
 
-
-    @SuppressLint("SimpleDateFormat")
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val storageDir: File? = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-
-        return File.createTempFile(
-                "JPEG_${timeStamp}_",
-                ".jpg",
-                storageDir
-        ).apply { tempFilePath=absolutePath }
-    }
-
-
+    // 카메라 리쿼스트
     @SuppressLint("QueryPermissionsNeeded")
     private fun camRequest() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
@@ -204,6 +195,23 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
         }
     }
 
+    //카메라 리퀘스트에서 원본 파일 사이즈로 비트맵을 받아오기 위한 임시 파일 생성 메서드
+    @SuppressLint("SimpleDateFormat")
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File? = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+        return File.createTempFile(
+                "JPEG_${timeStamp}_",
+                ".jpg",
+                storageDir
+        ).apply { tempFilePath=absolutePath }
+    }
+
+
+
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -223,19 +231,21 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
         initRecycler()
     }
 
+    // pressback일때 메모 파일 자동으로 저장 콜백 바인딩
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        onBackPressedCallback = object : OnBackPressedCallback(true) {
+
+        onBackPressedSaveMemoCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 handleViewModel.onSaveButtonClick()
             }
         }
-        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedSaveMemoCallback)
     }
-
+    // pressback 콜백 제거
     override fun onDetach() {
         super.onDetach()
-        onBackPressedCallback.remove()
+        onBackPressedSaveMemoCallback.remove()
     }
 
 }

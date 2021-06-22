@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.ldg.skymemo.databinding.ItemThumnailImageBinding
 import javax.inject.Inject
 
+//메모 리스트의 썸네일을 위한 뷰홀더
 class ThumbnailViewHolder(private val binding: ItemThumnailImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Bitmap){

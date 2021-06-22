@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
+@Deprecated("다이얼로그를 사용하지 않게됨")
 class ImageSourceDialog: SingleViewModelDialogFragment<HandleViewModel, ImageSourceDialogBinding>() {
 
 

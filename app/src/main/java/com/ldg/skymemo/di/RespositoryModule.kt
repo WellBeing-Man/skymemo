@@ -1,7 +1,5 @@
 package com.ldg.skymemo.di
 
-import com.ldg.skymemo.data.FileSaver
-import com.ldg.skymemo.data.Memo
 import com.ldg.skymemo.repository.MemoReadRepositoryImpl
 import com.ldg.skymemo.repository.MemoRepositoryImpl
 import com.ldg.skymemo.repository.ReadRepository
@@ -12,7 +10,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Qualifier
 
-
+// todo db와 network 추가시 리포추가
 @InstallIn(SingletonComponent::class)
 @Module
 abstract class RepositoryModule{

@@ -9,6 +9,7 @@ import java.io.FileInputStream
 import java.io.ObjectInputStream
 
 
+// file을 memofile로 맵
 fun File.mapToMemoFile():MemoFile? {
 
     return try {
@@ -22,6 +23,7 @@ fun File.mapToMemoFile():MemoFile? {
     }
 }
 
+// memofile을 memo로 맵핑
 fun MemoFile.mapToMemo(): Memo {
     var background: Bitmap? = null
     val photoList= mutableListOf<Bitmap>()

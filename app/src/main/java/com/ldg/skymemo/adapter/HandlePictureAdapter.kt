@@ -15,6 +15,9 @@ import com.ldg.skymemo.R
 import com.ldg.skymemo.adapter.HandlePictureAdapter.*
 import com.ldg.skymemo.databinding.ItemHandleImageBinding
 
+//파일시스템에서 불러온 비트맵 파일에 대한 Recycler Adapter
+// 클릭 콜백 -> 사진 상세보기
+// 삭제 콜백 -> 사진 삭제
 class HandlePictureAdapter(private val onClickCallBack:(bitmap:Bitmap)->Unit,private val onDeleteCallback:(index:Int)->Unit) : ListAdapter<BitmapItem, ViewHolder>(diffUtil)  {
 
     private val DEBUG_TAG: String="HandlePictureAdapter"
@@ -25,8 +28,13 @@ class HandlePictureAdapter(private val onClickCallBack:(bitmap:Bitmap)->Unit,pri
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(currentList[position].bitmap,onClickCallBack)
-        holder.binding.deletePictureImageVIew.setOnClickListener {
-            onDeleteCallback(position)
+
+        // 삭제버튼 콜백 바인딩 및 뷰 우선순위
+        holder.binding.deletePictureImageVIew.apply {
+            bringToFront()
+            setOnClickListener {
+                onDeleteCallback(position)
+            }
         }
     }
 
@@ -40,8 +48,6 @@ class HandlePictureAdapter(private val onClickCallBack:(bitmap:Bitmap)->Unit,pri
                 binding.itemPicture.setOnClickListener {
                     onClick(item)
                 }
-
-                binding.deletePictureImageVIew.bringToFront()
             }
 
         companion object {
@@ -54,6 +60,8 @@ class HandlePictureAdapter(private val onClickCallBack:(bitmap:Bitmap)->Unit,pri
     }
 
 
+    //비트맵에 대한 id를 가진 sealed class
+    //todo sealed class에 대한 공부후 리펙토링
     companion object{
         val diffUtil = object : DiffUtil.ItemCallback<BitmapItem>() {
             override fun areItemsTheSame(oldItem: BitmapItem, newItem: BitmapItem): Boolean {

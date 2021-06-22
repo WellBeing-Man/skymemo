@@ -10,8 +10,9 @@ import com.ldg.skymemo.adapter.ThumbNailAdapter
 import com.ldg.skymemo.data.Memo
 import com.ldg.skymemo.databinding.ItemMemoListBinding
 
-class MemoListViewHolder(private val binding: ItemMemoListBinding) : RecyclerView.ViewHolder(binding.root) {
 
+//메모 리스트에 대한 뷰 홀더
+class MemoListViewHolder(private val binding: ItemMemoListBinding) : RecyclerView.ViewHolder(binding.root) {
 
     private val thumbNailAdapter =ThumbNailAdapter()
 
@@ -19,6 +20,7 @@ class MemoListViewHolder(private val binding: ItemMemoListBinding) : RecyclerVie
 
         resetMotion()
 
+        // 데이터 바인딩
         memoContentTextView.text=item.content
 
         Glide.with(backgroundImageView)
@@ -40,6 +42,7 @@ class MemoListViewHolder(private val binding: ItemMemoListBinding) : RecyclerVie
 
     }
 
+    // motion상태를 초기화 하기 위한 메서드
     private fun resetMotion(){
         this.binding.memoContainerLayout.transitionToStart()
     }

@@ -59,7 +59,8 @@ class ListViewModel @Inject constructor(memoReadRepository: ReadRepository) : Vi
         _addButtonClicked.value=false
     }
 
-    fun addMemo(fileList: Array<File>) {
+    // content resolver로 받아온 파일 리스트 리프레시
+    fun refreshMemo(fileList: Array<File>) {
         Log.d(DEBUG_TAG,fileList.size.toString())
 
         viewModelScope.launch {
@@ -80,7 +81,7 @@ class ListViewModel @Inject constructor(memoReadRepository: ReadRepository) : Vi
     }
 
 
-
+    // 메모 삭제
     fun remove(memo: Memo) {
         val file=fileMemo[memo]
 

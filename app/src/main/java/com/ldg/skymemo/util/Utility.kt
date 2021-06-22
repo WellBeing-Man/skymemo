@@ -8,6 +8,7 @@ import android.view.View
 import java.text.SimpleDateFormat
 
 
+// View에서 background를 비트맵형태로 저장
 fun loadBitmapFromView(view: View): Bitmap? {
     val specWidth = View.MeasureSpec.makeMeasureSpec(900, View.MeasureSpec.EXACTLY)
     view.measure(specWidth, specWidth)
@@ -21,6 +22,7 @@ fun loadBitmapFromView(view: View): Bitmap? {
     return bitmap
 }
 
+// timestamp를 파일시스템에 저장
 @SuppressLint("SimpleDateFormat")
 fun timeToFileName(time:Long):String{
     val simpleDateFormat=SimpleDateFormat("yyyyMMddHHmmssSSSS")

@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 
+// ViewDataBinding을 사용하는 프래그먼트의 보일러 플레이트 줄이기
 open class BindingFragment<V:ViewDataBinding> : Fragment() {
 
     protected lateinit var binding:V
