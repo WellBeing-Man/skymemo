@@ -59,14 +59,12 @@ class HandleViewModel @Inject constructor(private val memoFileSaverImpl: FileSav
     }
 
     fun removePicture(index :Int){
-        if(checkLimit().not())
-            return
-        pictures.remove(index)
+          pictures.remove(index)
     }
 
     //사진 파일은 6개가 한계
-    private fun checkLimit():Boolean{
-        return pictures.size() <= pictureLimit || pictures.size()>=0
+    fun checkLimit():Boolean{
+        return pictures.size() in 0 until pictureLimit
     }
 
 }

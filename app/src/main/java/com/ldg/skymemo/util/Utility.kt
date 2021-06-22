@@ -10,11 +10,11 @@ import java.text.SimpleDateFormat
 
 // View에서 background를 비트맵형태로 저장
 fun loadBitmapFromView(view: View): Bitmap? {
-    val specWidth = View.MeasureSpec.makeMeasureSpec(900, View.MeasureSpec.EXACTLY)
+    val specWidth = View.MeasureSpec.makeMeasureSpec(1800, View.MeasureSpec.EXACTLY)
     view.measure(specWidth, specWidth)
     val questionWidth = view.measuredWidth
-
-    val bitmap = Bitmap.createBitmap(questionWidth, questionWidth, Bitmap.Config.ARGB_8888)
+    val questionHeight= view.measuredHeight
+    val bitmap = Bitmap.createBitmap(questionWidth, questionHeight, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
     canvas.drawColor(Color.WHITE)
     view.layout(view.left, view.top, view.right, view.bottom)

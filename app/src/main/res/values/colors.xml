@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="sky">#00bfff</color>
     <color name="red">#FF0000</color>
+    <color name="corner_gray">#A0A0A0</color>
 </resources>

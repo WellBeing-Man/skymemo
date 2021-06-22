@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -65,7 +67,9 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
             if (result.resultCode == Activity.RESULT_OK) {
                 val bitmap = BitmapFactory.decodeFile(tempFilePath)
                 bitmap ?: throw NullPointerException()
-                handleViewModel.addPicture(bitmap)
+                addBitmapToViewModel(bitmap)
+
+
             }
         } catch (n: NullPointerException) {
             n.printStackTrace()
@@ -77,9 +81,10 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
             try {
                 val inputStream = requireContext().contentResolver.openInputStream(it)
                 val bitmap = BitmapFactory.decodeStream(inputStream)
-                handleViewModel.addPicture(bitmap)
+                addBitmapToViewModel(bitmap)
                 inputStream?:throw NullPointerException()
                 inputStream.close()
+
             } catch (f: FileNotFoundException) {
                 f.printStackTrace()
             } catch (n:NullPointerException){
@@ -87,6 +92,8 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
             }
         }
     }
+
+
 
 
     private fun initObserver() = with(handleViewModel){
@@ -140,8 +147,12 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
                     drawingGroup.visibility = View.VISIBLE
                     pictureSelectGroup.visibility=View.GONE
                 }
-                R.id.pictureRadioButton->{
-                    pictureSelectGroup.visibility=View.VISIBLE
+                R.id.pictureRadioButton -> {
+                    if (handleViewModel.checkLimit()) {
+                        pictureSelectGroup.visibility = View.VISIBLE
+                    }else{
+                        showLimited()
+                    }
                 }
             }
         }
@@ -151,13 +162,25 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
         }
 
         chooseAlbumImageView.setOnClickListener {
-            albumRequest()
+            if (handleViewModel.checkLimit()) {
+                albumRequest()
+                }else{
+                    showLimited()
+            }
         }
 
         chooseCamImageView.setOnClickListener {
-            camRequest()
+            if (handleViewModel.checkLimit()) {
+                camRequest()
+            }else{
+                showLimited()
+            }
         }
 
+    }
+
+    private fun showLimited() {
+        Toast.makeText(requireContext(),"사진을 6장까지 추가 가능합니다.",Toast.LENGTH_LONG).show()
     }
 
 
@@ -210,7 +233,9 @@ class HandleFragment : BindingFragment<FragmentMemoHandleBinding>() {
         ).apply { tempFilePath=absolutePath }
     }
 
-
+    private fun addBitmapToViewModel(bitmap: Bitmap?) {
+        handleViewModel.addPicture(bitmap)
+    }
 
 
     override fun onCreateView(
