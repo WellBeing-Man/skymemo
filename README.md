@@ -10,8 +10,9 @@
 
 ## Todo
  1. <del>주석 정리</del> -> Done, 지속적인 주석 필요
- 2. 예쁜 UI 적용
- 3. Motion layout 적용 
- 4. 메모 내용 자동인식
- 5. Server & Datbase
- 6. To be more clean code..
+ 2. <del>예쁜 UI 적용</del> -> Done
+ 3. 메모 수정 기능 추가
+ 4. Motion layout 적용 
+ 5. 메모 내용 자동인식
+ 6. Server & Datbase
+ 7. To be more clean code..
